@@ -1,0 +1,18 @@
+*** MtSys:  Multi Operation System for PC ***
+
+  This is an old program I build years ago, when I was in colledge using MASM 4.0.  I only wrote the core, multi system boot loader, and did not finish the remain parts such as installer, partitioning function.  The core function is enough for me, I can do the rest with other utilities.  That is why I never publish it, it is an unfinished stuff.
+
+  Now with so many community collaborative way, it is not a problem publishing something unfinished.  It looks like time to release this program, but also looks like being too late.  This program does not support GPT, GUID Partition Table, and may not compatible with UEFI.
+
+  Though being late, it may possibly help some to learn things by reading this program.  I leave it here with a license for any one want to read, use or even decompose it.  Hope this helps.
+
+Explain:
+
+  This boot loader will switch the main partition table from one to an other by overwriting MBR. Tables should be likes:
+
+partition 1:  Type 0x2e, all partitions in front of the active OS partition
+partition 2:  Active OS partition
+partition 3:  Type 0x2f, all partitions after the active OS partition
+partition 4:  Extended partition
+
+
