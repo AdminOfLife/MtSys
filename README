@@ -1,18 +1,31 @@
 *** MtSys:  Multi Operation System for PC ***
 
-  This is an old program I build years ago, when I was in colledge using MASM 4.0.  I only wrote the core, multi system boot loader, and did not finish the remain parts such as installer, partitioning function.  The core function is enough for me, I can do the rest with other utilities.  That is why I never publish it, it is an unfinished stuff.
+  This is an old program I builded years ago, when I was in college using MASM 4.0.  It is a tiny program serves as an OS selector and only occupies disk space that will never be used.  I wrote the core only, as a multi system boot loader, and did not finish the remain parts such as installer, partitioning function, OS management, etc.  The core function is enough for me, I can do the rest with other utilities.  That is why I never publish it, it is an unfinished stuff.
 
-  Now with so many community collaborative way, it is not a problem publishing something unfinished.  It looks like time to release this program, but also looks like being too late.  This program does not support GPT, GUID Partition Table, and may not compatible with UEFI.
+  Now with so many community collaborative way, it is not a problem publishing something unfinished.  It looks like time to release this program, but also looks like being too late.  This program does not support GPT, GUID Partition Table, and may not compatible with UEFI.  Actually, UEFI can take place of it's core function, only legacy booting computers may need it.  It was builded on computers with hard disk drives under one giga bytes, when space was limited resource.  Today hard disk drives have 100 times size than those, so small size of it brings not much benefit now.
 
-  Though being late, it may possibly help some to learn things by reading this program.  I leave it here with a license for any one want to read, use or even decompose it.  Hope this helps.
+  This program has a shortcoming.  It will overwrite the MBR every time when switch from one OS to another.  It is not too risky to do this on a regular hard disk.  But if your system work with a solid state drive, SSD, this could be a bad idea.  Most SSD made of NAND Flash memory, that with memory wear and brings limited program–erase cycles.  This means with too much switching, the SSD will stop working on someday near.  Then, user may lose all the data in it.
+
+  Though being too late, it may possibly help someone to learn things by reading this program.  I leave it here with a license for any one want to read, use or even decompose it.  Hope this helps.
 
 Explain:
 
-  This boot loader will switch the main partition table from one to an other by overwriting MBR. Tables should be likes:
+  This boot loader will switch the main partition table from one to an other by overwriting MBR. Tables should be like this:
 
 partition 1:  Type 0x2e, all partitions in front of the active OS partition
 partition 2:  Active OS partition
 partition 3:  Type 0x2f, all partitions after the active OS partition
 partition 4:  Extended partition
 
+  And the hard disk shall be divided like this:
 
+OS 1 partition:  hide in partition 1
+OS 2 partition:  hide in partition 1
+OS 3 partition:  hide in partition 1
+OS 4 partition:  partition 2, Active OS
+OS 5 partition:  hide in partition 3
+OS 6 partition:  hide in partition 3
+Extended partition:  partition 4
+    logical drive partition 5
+    logical drive partition 6
+    logical drive partition 7 ...
