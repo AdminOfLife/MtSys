@@ -29,3 +29,5 @@ Extended partition:  partition 4
     logical drive partition 5
     logical drive partition 6
     logical drive partition 7 ...
+
+  Every OS has it's own 512 bytes MBR image, containing the loader and the main partition table.  They are stored in the sectors after the program.  The 64 bytes of partition table will be copy into the real MBR sector, and the loader will only be execute in memory.  (Just like some viroses do.)
